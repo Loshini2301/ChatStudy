@@ -1,5 +1,8 @@
 # Ex. No:1b 			Study of Client Server Chat Applications
-
+## Name: Loshini.G
+## Department: IT
+## Register No: 212223220051
+## Date:27/08/2024
 ## Aim: 
 To perform a study on Client Server Chat Applications
 ## Introduction:
@@ -73,6 +76,65 @@ Client-server chat applications are versatile tools that facilitate real-time co
 
 Client-server chat applications are foundational to real-time communication over networks. They incorporate principles of socket programming, communication protocols, and security mechanisms to provide a seamless user experience. Understanding the basics of client-server chat applications is essential for developers involved in networked application development, as they form the backbone of various collaborative communication systems. As technology evolves, chat applications continue to adapt, incorporating new features and technologies to enhance user interaction and connectivity.
 
+## Program:
+## Server:
+```
+import socket
+
+SERVER_HOST = '127.0.0.1'  
+SERVER_PORT = 12345        
+BUFFER_SIZE = 1024       
+
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server_socket.bind((SERVER_HOST, SERVER_PORT))
+server_socket.listen(1)  
+
+print(f"[*] Listening on {SERVER_HOST}:{SERVER_PORT}")
+
+client_socket, client_address = server_socket.accept()
+print(f"[+] {client_address} connected.")
+
+while True:
+    message = client_socket.recv(BUFFER_SIZE).decode()
+    if not message:
+    print(f"Client: {message}")
+
+    message_to_send = input("Server: ")
+    client_socket.send(message_to_send.encode())
+
+client_socket.close()
+server_socket.close()
+```
+## Client:
+```
+import socket
+
+SERVER_HOST = '127.0.0.1'  
+SERVER_PORT = 12345        
+BUFFER_SIZE = 1024          
+
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client_socket.connect((SERVER_HOST, SERVER_PORT))
+
+print(f"Connected to server at {SERVER_HOST}:{SERVER_PORT}")
+
+while True:
+
+    message_to_send = input("Client: ")
+    client_socket.send(message_to_send.encode())
+
+    message = client_socket.recv(BUFFER_SIZE).decode()
+    if not message:
+    print(f"Server: {message}")
+
+client_socket.close()
+```
+## Output:
+## Server:
+![image](https://github.com/user-attachments/assets/db9dde91-c71f-45c0-ad0b-9bd73c80635e)
+
+## Client:
+![image](https://github.com/user-attachments/assets/25740b2f-a077-419c-bde2-9ee389e8be1e)
 
 ## Result:
 
